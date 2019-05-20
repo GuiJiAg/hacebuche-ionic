@@ -1,38 +1,41 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Inicio de Sesión
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  
-  <ion-card *ngIf="information">
+
+  <ion-card>
     <ion-card-header>
-      <ion-card-title>
-        {{ information.Title }}
-      </ion-card-title>
-      <ion-card-subtitle>
-        {{ information.Year }}
-      </ion-card-subtitle>
+      <ion-card-title>Introduzca sus datos</ion-card-title>  
     </ion-card-header>
-    <ion-card-content text-center>
-      <img [src]="information.Poster" class="info-img">
-      {{ information.Plot }}
-
-      <ion-item lines="none">
-        <ion-icon name="star-half" slot="start"></ion-icon>
-        <ion-label>{{ information.imdbRating }}</ion-label>
+    <ion-card-content>
+      <ion-item>
+        <ion-input #email type="email" placeholder="Email" clearInput></ion-input>
       </ion-item>
-
-      <ion-item lines="none">
-        <ion-icon name="clipboard" slot="start"></ion-icon>
-        <ion-label text-wrap>{{ information.Director }}</ion-label>
+      <ion-item>
+        <ion-input #password type="password" placeholder="Contraseña" clearInput></ion-input>
       </ion-item>
-
-      <ion-item lines="none">
-        <ion-icon name="contacts" slot="start"></ion-icon>
-        <ion-label text-wrap>{{ information.Actors }}</ion-label>
-      </ion-item>
-
-      <ion-button expand="full" (click)="openWebsite()" *ngIf="information.Website && information.Website != 'N/A'">
-        <ion-icon name="open" slot="start"></ion-icon>
-        Open Website
+      <br />
+      <ion-button 
+        color="dark" 
+        expand="block" 
+        strong="true" 
+        (click)="signIn(email.value, password.value)"
+        >
+        Acceder
       </ion-button>
     </ion-card-content>
   </ion-card>
+
+  <ng-template [ngIf]="deniedAcces">
+    {{errorMessage}}
+  </ng-template>
   
 </ion-content>

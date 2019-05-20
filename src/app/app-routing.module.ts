@@ -18,7 +18,15 @@ const routes: Routes = [
   { 
     path: 'login', 
     loadChildren: './pages/login/login.module#LoginPageModule' 
-  }
+  },
+  { 
+    path: 'log-out', 
+    loadChildren: './pages/logout/logout.module#LogoutPageModule' 
+  },
+  { 
+    path: 'noLogged', 
+    redirectTo: '/login', 
+    pathMatch: 'full' },
 ];
 
 @NgModule({
