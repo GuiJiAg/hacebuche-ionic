@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -10,7 +10,7 @@ import { LoginService } from './services/login.service';
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public isLogged: boolean;
   public appPages = [
     {
@@ -38,6 +38,9 @@ export class AppComponent {
   ) {
     this.initializeApp();
     this.isLogged = this.login.isLogged();
+  }
+
+  ngOnInit() {
   }
 
   initializeApp() {

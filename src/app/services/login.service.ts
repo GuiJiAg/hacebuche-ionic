@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Credential } from '../models/credential';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -17,9 +16,9 @@ const httpOptions = {
 })
 export class LoginService {
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  isLogged() {
+  isLogged(): boolean {
     if (sessionStorage.isLogged) {
       return true;
     }
@@ -29,12 +28,12 @@ export class LoginService {
 
   goToLogin(isLogged) {
     if (!isLogged) {
-      this.router.navigate(['/noLogged']);
+      window.location.assign('http://localhost:8100/noLogged');
     }
   }
 
   goToHome() {
-    this.router.navigate(['/home']);
+    window.location.assign('http://localhost:8100');
   }
 
   signIn(credentials: Credential): Observable<Credential> {
