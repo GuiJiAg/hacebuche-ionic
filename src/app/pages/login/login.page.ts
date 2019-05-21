@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 import { LoginService } from '../../services/login.service';
 import { Credential } from '../../models/credential';
@@ -10,10 +11,11 @@ import { Credential } from '../../models/credential';
 })
 export class LoginPage {
   private credentials: Credential = new Credential;
-  private deniedAcces: boolean = false;
-  private errorMessage: string;
   
-  constructor(private login: LoginService) { }
+  constructor(
+    private login: LoginService,
+    private alertController: AlertController
+    ) { }
 
   signIn(email, password) {
     this.credentials.email = email;
@@ -26,13 +28,22 @@ export class LoginPage {
 
   checkResponse(response) {
     if (response.message != 'Acceso concedido') {
-      this.deniedAcces = true;
-      this.errorMessage = response.message;
+      this.showErrorMessageAlert();
     }
     else {
       sessionStorage.isLogged = true;
       localStorage.token = response.token;
       this.login.goToHome();
     }
+  }
+
+  async showErrorMessageAlert() {
+    const alert = await this.alertController.create({
+      header: 'Datos Incorrectos',
+      message: 'Correo o contraseña incorrectos',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 }

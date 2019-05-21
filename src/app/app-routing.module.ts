@@ -12,8 +12,12 @@ const routes: Routes = [
     loadChildren: './pages/home/home.module#HomePageModule'
   },
   {
-    path: 'list',
-    loadChildren: './pages/list/list.module#ListPageModule'
+    path: 'menu',
+    loadChildren: './pages/menu/menu.module#MenuPageModule'
+  },
+  {
+    path: 'wines',
+    loadChildren: './pages/wines/wines.module#WinesPageModule'
   },
   { 
     path: 'login', 
@@ -26,7 +30,8 @@ const routes: Routes = [
   { 
     path: 'noLogged', 
     redirectTo: '/login', 
-    pathMatch: 'full' },
+    pathMatch: 'full' 
+  }
 ];
 
 @NgModule({

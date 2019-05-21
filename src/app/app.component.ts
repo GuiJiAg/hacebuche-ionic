@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -10,37 +10,44 @@ import { LoginService } from './services/login.service';
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
-export class AppComponent implements OnInit {
-  public isLogged: boolean;
-  public appPages = [
-    {
-      title: 'Inicio',
-      url: '/home',
-      icon: 'home'
-    },
-    {
-      title: 'Tablas',
-      url: '/list',
-      icon: 'list'
-    },
-    {
-      title: 'Salir',
-      url: '/log-out',
-      icon: 'log-out'
-    }
-  ];
+export class AppComponent {
+  public appPages = [];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private login: LoginService
+    private login: LoginService,
   ) {
+    this.showListIfIsLogged();
     this.initializeApp();
-    this.isLogged = this.login.isLogged();
   }
 
-  ngOnInit() {
+  showListIfIsLogged() {
+    if (this.login.isLogged()) {
+      this.appPages = [
+        {
+          title: 'Inicio',
+          url: '/home',
+          icon: 'home'
+        },
+        {
+          title: 'Carta',
+          url: '/menu',
+          icon: 'restaurant'
+        },
+        {
+          title: 'Vinos',
+          url: '/wines',
+          icon: 'wine'
+        },
+        {
+          title: 'Salir',
+          url: '/log-out',
+          icon: 'log-out'
+        }
+      ];
+    }
   }
 
   initializeApp() {

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { LoginService } from '../../services/login.service';
 
@@ -9,15 +8,24 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  private isLogged: boolean;
+  public appPages = [
+    {
+      title: 'Consultar Carta',
+      url: '/menu',
+      icon: 'restaurant'
+    },
+    {
+      title: 'Consultar Vinos',
+      url: '/wines',
+      icon: 'wine'
+    }
+  ];
 
   constructor(
-    private router: Router,
     private login: LoginService
-    ) {}
+  ) {}
 
   ngOnInit() {
-    this.isLogged = this.login.isLogged();
-    this.login.goToLogin(this.isLogged);
+    this.login.goToLogin(this.login.isLogged());
   }
 }
