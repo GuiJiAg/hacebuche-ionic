@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
-const apiMenuUrl = 'http://localhost:3000/api/menu';
+const apiMenuUrl = 'https://hacebuche-api.herokuapp.com/api/menu';
 const httpOptions = {
   headers: new HttpHeaders({ 
     'Content-Type': 'application/json'
