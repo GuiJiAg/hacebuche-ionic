@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core';
+import { Router } from '@angular/router';
 
 import { Food } from '../../models/food';
 
@@ -58,7 +59,8 @@ export class MenuPage implements OnInit {
     private login: LoginService,
     private menuService: MenuService,
     private modalController: ModalController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -101,19 +103,14 @@ export class MenuPage implements OnInit {
     const loading = await this.loadingController.create({
       message: 'Cargando...',
       spinner: 'dots',
-      duration: 500,
+      duration: 1000,
       translucent: true
     });
 
     await loading.present();
-  }  
-
-  async myDismiss() {
-    await this.modalController.dismiss();
-  }
+  } 
 
   async openCollection(items) {
-    this.myDismiss();
     this.collectionItems = items;
 
     const modalOptions = {
@@ -127,9 +124,19 @@ export class MenuPage implements OnInit {
      
     modal.onDidDismiss().then((detail: OverlayEventDetail) => {
        if (detail !== null) {
+         this.goMenuDetails(detail.data);
        }
     });
     
     await modal.present();
+  }
+
+  goMenuDetails(detail) {
+    if (detail.resultType == 'post') {
+      this.router.navigate(['/', 'menu', detail.resultValue]);
+    }
+    else if (detail.resultType == 'put') {
+      this.router.navigate(['/', 'menu', detail.resultValue]);
+    }
   }
 }

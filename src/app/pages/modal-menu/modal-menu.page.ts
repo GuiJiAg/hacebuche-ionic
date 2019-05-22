@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ModalController, NavParams} from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 
 import { Food } from '../../models/food';
@@ -24,29 +24,28 @@ export class ModalMenuPage {
     this.collectionItems = this.navParams.get('collectionItems');
   }
 
-  async myDismiss() {
-    const result: string = "Funciona";
-    
+  async dismissModal(type, value) {
+    const result = { resultType: type, resultValue: value };
     await this.modalController.dismiss(result);
   }
 
-  async presentActionSheet(id) {
+  async presentActionSheet(id, name) {
     const actionSheet = await this.actionSheetController.create({
-      header: 'Opciones',
+      header: name,
       translucent: true,
       buttons: [{
+        text: 'Ver/Modificar',
+        icon: 'create',
+        handler: () => {
+          this.dismissModal('put', id);
+        }
+      },
+      { 
         text: 'Eliminar',
         role: 'destructive',
         icon: 'trash',
         handler: () => {
           alert(`Delete clicked(${id})`);
-        }
-      }, 
-      {
-        text: 'Ver/Modificar',
-        icon: 'create',
-        handler: () => {
-          alert(`Select/Update clicked(${id})`);
         }
       }, 
       {

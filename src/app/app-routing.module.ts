@@ -31,7 +31,11 @@ const routes: Routes = [
     path: 'noLogged', 
     redirectTo: '/login', 
     pathMatch: 'full' 
-  }
+  },
+  { 
+    path: 'menu/:id', 
+    loadChildren: './pages/menu-details/menu-details.module#MenuDetailsPageModule' }
+
 ];
 
 @NgModule({

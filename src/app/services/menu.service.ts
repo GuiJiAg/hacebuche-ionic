@@ -5,9 +5,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 const apiMenuUrl = 'https://hacebuche-api.herokuapp.com/api/menu';
+const token = `Bearer ${localStorage.token}`;
 const httpOptions = {
   headers: new HttpHeaders({ 
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'authorization': token
   })
 };
 
@@ -72,6 +74,14 @@ export class MenuService {
     return this.http.get<Food[]>(`${apiMenuUrl}/desserts`)
       .pipe(
         catchError(this.handleError<Food[]>('getDesserts', []))
+    );
+  }
+
+  /*   POSTs   */
+
+  postEntree(entree: Food): Observable<Food> {
+    return this.http.post<Food>(apiMenuUrl, entree, httpOptions).pipe(
+      catchError(this.handleError<Food>('postEntree'))
     );
   }
 

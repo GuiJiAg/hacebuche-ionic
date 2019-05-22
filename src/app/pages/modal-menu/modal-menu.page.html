@@ -9,12 +9,16 @@
 
 <ion-content>
 
+  <div>
+    <ion-chip color="dark" (click)="dismissModal('post', collectionName)">
+      <ion-label>Añadir a {{collectionName}}</ion-label>
+      <ion-icon name="add"></ion-icon>
+    </ion-chip>
+  </div>
+
   <ion-list>
-    <ion-list-header>
-      <ion-label><strong>Seleccione un producto</strong></ion-label>
-    </ion-list-header>
     <div *ngFor="let item of collectionItems">
-      <ion-item button="true" detail="false" (click)="presentActionSheet(item._id)">
+      <ion-item button="true" detail="false" (click)="presentActionSheet(item._id, item.name)">
         <ion-label>
           {{item.name}}
         </ion-label>
