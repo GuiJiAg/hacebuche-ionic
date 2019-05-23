@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MenuDetailsPage } from './menu-details.page';
+import { MenuInsertUpdatePage } from './menu-insert-update.page';
 
-describe('MenuDetailsPage', () => {
-  let component: MenuDetailsPage;
-  let fixture: ComponentFixture<MenuDetailsPage>;
+describe('MenuInsertUpdatePage', () => {
+  let component: MenuInsertUpdatePage;
+  let fixture: ComponentFixture<MenuInsertUpdatePage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MenuDetailsPage ],
+      declarations: [ MenuInsertUpdatePage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MenuDetailsPage);
+    fixture = TestBed.createComponent(MenuInsertUpdatePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

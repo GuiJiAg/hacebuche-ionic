@@ -4,13 +4,12 @@ import { OverlayEventDetail } from '@ionic/core';
 import { Router } from '@angular/router';
 
 import { Food } from '../../models/food';
-
 import { MenuService } from '../../services/menu.service';
 import { LoginService } from '../../services/login.service';
-
 import { ModalMenuPage } from '../modal-menu/modal-menu.page';
 
 const rootAssets = '../../../assets';
+const postResponseMessage = 'Nuevo producto añadido:';
 
 @Component({
   selector: 'app-menu',
@@ -132,10 +131,7 @@ export class MenuPage implements OnInit {
   }
 
   goMenuDetails(detail) {
-    if (detail.resultType == 'post') {
-      this.router.navigate(['/', 'menu', detail.resultValue]);
-    }
-    else if (detail.resultType == 'put') {
+    if (detail.resultType == 'post-put') {
       this.router.navigate(['/', 'menu', detail.resultValue]);
     }
   }

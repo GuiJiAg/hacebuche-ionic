@@ -24,7 +24,7 @@ export class ModalMenuPage {
     this.collectionItems = this.navParams.get('collectionItems');
   }
 
-  async dismissModal(type, value) {
+  async dismissModal(type, value = false) {
     const result = { resultType: type, resultValue: value };
     await this.modalController.dismiss(result);
   }
@@ -37,7 +37,7 @@ export class ModalMenuPage {
         text: 'Ver/Modificar',
         icon: 'create',
         handler: () => {
-          this.dismissModal('put', id);
+          this.dismissModal('post-put', id);
         }
       },
       { 

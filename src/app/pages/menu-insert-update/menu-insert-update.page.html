@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Introduzca los nuevos datos</ion-card-title>  
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-input #name value="{newFood.name}" type="text" placeholder="Nombre" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input #description value="{newFood.description}" type="text" placeholder="Descripción" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input #price value="{newFood.price}" type="text" placeholder="Precio" clearInput></ion-input>
+      </ion-item>
+      <br />
+      <ion-button 
+        color="dark" 
+        expand="block" 
+        strong="true" 
+        (click)="checkRequest(name.value, description.value, price.value)"
+        >
+        {{buttonText}}
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

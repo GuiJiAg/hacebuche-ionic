@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="dark">
     <ion-title>{{collectionName}}</ion-title>
-    <ion-item button="true" detail="false" color="dark" slot="end" (click)="myDismiss()">
+    <ion-item button="true" detail="false" color="dark" slot="end" (click)="dismissModal('close')">
       <ion-icon name="close"></ion-icon>
     </ion-item>
   </ion-toolbar>
@@ -10,7 +10,7 @@
 <ion-content>
 
   <div>
-    <ion-chip color="dark" (click)="dismissModal('post', collectionName)">
+    <ion-chip color="dark" (click)="dismissModal('post-put', collectionName)">
       <ion-label>Añadir a {{collectionName}}</ion-label>
       <ion-icon name="add"></ion-icon>
     </ion-chip>
@@ -18,7 +18,7 @@
 
   <ion-list>
     <div *ngFor="let item of collectionItems">
-      <ion-item button="true" detail="false" (click)="presentActionSheet(item._id, item.name)">
+      <ion-item button="true" detail="false" (click)="presentActionSheet(collectionName+'-'+item._id, item.name)">
         <ion-label>
           {{item.name}}
         </ion-label>

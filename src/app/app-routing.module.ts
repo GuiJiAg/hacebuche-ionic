@@ -33,8 +33,9 @@ const routes: Routes = [
     pathMatch: 'full' 
   },
   { 
-    path: 'menu/:id', 
-    loadChildren: './pages/menu-details/menu-details.module#MenuDetailsPageModule' }
+    path: 'menu/:param', 
+    loadChildren: './pages/menu-insert-update/menu-insert-update.module#MenuInsertUpdatePageModule' 
+  }
 
 ];
 
