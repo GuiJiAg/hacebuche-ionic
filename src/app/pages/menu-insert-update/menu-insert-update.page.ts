@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 
@@ -10,7 +10,8 @@ const collectionNames: string[] = [
   'Entrantes', 'Tostas', 'Ensaladas', 'Pastas',
   'Revueltos', 'Pescados', 'Carnes', 'Postres'
 ];
-const postResponseMessage = 'Nuevo producto añadido:';
+const postResponseMessage = 'Producto añadido en ';
+const putResponseMessage = 'Producto modificado en ';
 
 @Component({
   selector: 'app-menu-insert-update',
@@ -18,10 +19,6 @@ const postResponseMessage = 'Nuevo producto añadido:';
   styleUrls: ['./menu-insert-update.page.scss'],
 })
 export class MenuInsertUpdatePage implements OnInit {
-  @ViewChild('name') nameInput: ElementRef;
-  @ViewChild('description') descriptionInput: ElementRef;
-  @ViewChild('price') priceInput: ElementRef;
-
   title: string;
   collectionName: string;
   isPost: boolean;
@@ -36,8 +33,7 @@ export class MenuInsertUpdatePage implements OnInit {
     private menuService: MenuService,
     private alertController: AlertController,
     private router: Router,
-    private toastController: ToastController,
-    private renderer: Renderer2
+    private toastController: ToastController
     ) { }
 
   ngOnInit() {
@@ -69,15 +65,13 @@ export class MenuInsertUpdatePage implements OnInit {
     }
   }
 
-  checkRequest(name, description, price) {
+  checkRequest(price) {
     let pattern = /^[0-9]+(\.[0-9]+)?$/;
 
     if(!pattern.test(price)) {
       this.showError();
     }
     else {
-      this.newFood.name = name;
-      this.newFood.description = description;
       this.newFood.price = parseFloat(price);
       this.sendRequest();
     }
@@ -98,89 +92,129 @@ export class MenuInsertUpdatePage implements OnInit {
       case 'Entrantes':
         if (this.isPost) {
           this.menuService.postEntree(this.newFood).subscribe(
-            item => this.showToast(`${postResponseMessage} \"${item.name}\"`));
+            item => this.showToast(`${postResponseMessage}${this.collectionName}`));
           this.router.navigate(['/', 'menu']);
         }
         else if (this.isGet) {
           this.menuService.getEntree(this.menuId).subscribe(item => this.checkResponse(item));
           this.isGet = false;
         }
+        else {
+          this.menuService.putEntree(this.newFood, this.menuId).subscribe(
+            item => this.showToast(`${putResponseMessage}${this.collectionName}`));
+          this.router.navigate(['/', 'menu']);
+        }
         break;
       case 'Tostas':
         if (this.isPost) {
           this.menuService.postToast(this.newFood).subscribe(
-            item => this.showToast(`${postResponseMessage} \"${item.name}\"`));
+            item => this.showToast(`${postResponseMessage}${this.collectionName}`));
           this.router.navigate(['/', 'menu']);
         }
         else if (this.isGet) {
           this.menuService.getToast(this.menuId).subscribe(item => this.checkResponse(item));
           this.isGet = false;
         }
+        else {
+          this.menuService.putToast(this.newFood, this.menuId).subscribe(
+            item => this.showToast(`${putResponseMessage}${this.collectionName}`));
+          this.router.navigate(['/', 'menu']);
+        }
         break;
       case 'Ensaladas':
         if (this.isPost) {
           this.menuService.postSalad(this.newFood).subscribe(
-            item => this.showToast(`${postResponseMessage} \"${item.name}\"`));
+            item => this.showToast(`${postResponseMessage}${this.collectionName}`));
           this.router.navigate(['/', 'menu']);
         }
         else if (this.isGet) {
           this.menuService.getSalad(this.menuId).subscribe(item => this.checkResponse(item));
           this.isGet = false;
         }
+        else {
+          this.menuService.putSalad(this.newFood, this.menuId).subscribe(
+            item => this.showToast(`${putResponseMessage}${this.collectionName}`));
+          this.router.navigate(['/', 'menu']);
+        }
         break;
       case 'Pastas':
         if (this.isPost) {
           this.menuService.postPasta(this.newFood).subscribe(
-            item => this.showToast(`${postResponseMessage} \"${item.name}\"`));
+            item => this.showToast(`${postResponseMessage}${this.collectionName}`));
           this.router.navigate(['/', 'menu']);
         }
         else if (this.isGet) {
           this.menuService.getPasta(this.menuId).subscribe(item => this.checkResponse(item));
           this.isGet = false;
+        }
+        else {
+          this.menuService.putPasta(this.newFood, this.menuId).subscribe(
+            item => this.showToast(`${putResponseMessage}${this.collectionName}`));
+          this.router.navigate(['/', 'menu']);
         }
         break;
       case 'Revueltos':
         if (this.isPost) {
           this.menuService.postScrambled(this.newFood).subscribe(
-            item => this.showToast(`${postResponseMessage} \"${item.name}\"`));
+            item => this.showToast(`${postResponseMessage}${this.collectionName}`));
           this.router.navigate(['/', 'menu']);
         }
         else if (this.isGet) {
-          this.menuService.getPasta(this.menuId).subscribe(item => this.checkResponse(item));
+          this.menuService.getScrambled(this.menuId).subscribe(item => this.checkResponse(item));
           this.isGet = false;
+        }
+        else {
+          this.menuService.putScrambled(this.newFood, this.menuId).subscribe(
+            item => this.showToast(`${putResponseMessage}${this.collectionName}`));
+          this.router.navigate(['/', 'menu']);
         }
         break;
       case 'Pescados':
         if (this.isPost) {
           this.menuService.postFish(this.newFood).subscribe(
-            item => this.showToast(`${postResponseMessage} \"${item.name}\"`));
+            item => this.showToast(`${postResponseMessage}${this.collectionName}`));
           this.router.navigate(['/', 'menu']);
         }
         else if (this.isGet) {
           this.menuService.getFish(this.menuId).subscribe(item => this.checkResponse(item));
           this.isGet = false;
         }
+        else {
+          this.menuService.putFish(this.newFood, this.menuId).subscribe(
+            item => this.showToast(`${putResponseMessage}${this.collectionName}`));
+          this.router.navigate(['/', 'menu']);
+        }
         break;
       case 'Carnes':
         if (this.isPost) {
           this.menuService.postMeat(this.newFood).subscribe(
-            item => this.showToast(`${postResponseMessage} \"${item.name}\"`));
+            item => this.showToast(`${postResponseMessage}${this.collectionName}`));
           this.router.navigate(['/', 'menu']);
         }
         else if (this.isGet) {
           this.menuService.getMeat(this.menuId).subscribe(item => this.checkResponse(item));
           this.isGet = false;
         }
+        else {
+          this.menuService.putMeat(this.newFood, this.menuId).subscribe(
+            item => this.showToast(`${putResponseMessage}${this.collectionName}`));
+          this.router.navigate(['/', 'menu']);
+        }
         break;
       case 'Postres':
         if (this.isPost) {
           this.menuService.postDessert(this.newFood).subscribe(
-            item => this.showToast(`${postResponseMessage} \"${item.name}\"`));
+            item => this.showToast(`${postResponseMessage}${this.collectionName}`));
           this.router.navigate(['/', 'menu']);
         }
         else if (this.isGet) {
           this.menuService.getDessert(this.menuId).subscribe(item => this.checkResponse(item));
           this.isGet = false;
+        }
+        else {
+          this.menuService.putDessert(this.newFood, this.menuId).subscribe(
+            item => this.showToast(`${putResponseMessage}${this.collectionName}`));
+          this.router.navigate(['/', 'menu']);
         }
         break;
     }
@@ -198,12 +232,12 @@ export class MenuInsertUpdatePage implements OnInit {
   }
 
   checkResponse(item) {
-    if (!item.message) {
+    if (item) {
       this.title = `Datos de ${item.name}`;
       this.newFood = item;
     }
     else {
-      this.showToast(item.message);
+      this.showToast("ERROR: Ese producto no existe");
       this.router.navigate(['/', 'menu']);
     }
   }

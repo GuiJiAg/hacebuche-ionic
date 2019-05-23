@@ -15,20 +15,20 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-input #name value="{newFood.name}" type="text" placeholder="Nombre" clearInput></ion-input>
+        <ion-input [(ngModel)]="newFood.name" type="text" placeholder="Nombre" clearInput></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input #description value="{newFood.description}" type="text" placeholder="Descripción" clearInput></ion-input>
+        <ion-input [(ngModel)]="newFood.description" type="text" placeholder="Descripción" clearInput></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input #price value="{newFood.price}" type="text" placeholder="Precio" clearInput></ion-input>
+        <ion-input #price [(ngModel)]="newFood.price" type="number" placeholder="Precio" clearInput></ion-input>
       </ion-item>
       <br />
       <ion-button 
         color="dark" 
         expand="block" 
         strong="true" 
-        (click)="checkRequest(name.value, description.value, price.value)"
+        (click)="checkRequest(price.value)"
         >
         {{buttonText}}
       </ion-button>

@@ -183,6 +183,106 @@ export class MenuService {
     );
   }
 
+  /*----------   PUTs   ----------*/
+
+  putEntree(entree: Food, id): Observable<Food> {
+    return this.http.put<Food>(`${apiMenuUrl}/entrees/${id}`, entree, httpOptions).pipe(
+      catchError(this.handleError<Food>('putEntree'))
+    );
+  }
+
+  putToast(toast: Food, id): Observable<Food> {
+    return this.http.put<Food>(`${apiMenuUrl}/toasts/${id}`, toast, httpOptions).pipe(
+      catchError(this.handleError<Food>('putToast'))
+    );
+  }
+
+  putSalad(salad: Food, id): Observable<Food> {
+    return this.http.put<Food>(`${apiMenuUrl}/salads/${id}`, salad, httpOptions).pipe(
+      catchError(this.handleError<Food>('putSalad'))
+    );
+  }
+
+  putPasta(pasta: Food, id): Observable<Food> {
+    return this.http.put<Food>(`${apiMenuUrl}/pastas/${id}`, pasta, httpOptions).pipe(
+      catchError(this.handleError<Food>('putPasta'))
+    );
+  }
+
+  putScrambled(scrambled: Food, id): Observable<Food> {
+    return this.http.put<Food>(`${apiMenuUrl}/scrambleds/${id}`, scrambled, httpOptions).pipe(
+      catchError(this.handleError<Food>('putScrambled'))
+    );
+  }
+
+  putFish(fish: Food, id): Observable<Food> {
+    return this.http.put<Food>(`${apiMenuUrl}/fishs/${id}`, fish, httpOptions).pipe(
+      catchError(this.handleError<Food>('putFish'))
+    );
+  }
+
+  putMeat(meat: Food, id): Observable<Food> {
+    return this.http.put<Food>(`${apiMenuUrl}/meats/${id}`, meat, httpOptions).pipe(
+      catchError(this.handleError<Food>('putMeat'))
+    );
+  }
+
+  putDessert(dessert: Food, id): Observable<Food> {
+    return this.http.put<Food>(`${apiMenuUrl}/desserts/${id}`, dessert, httpOptions).pipe(
+      catchError(this.handleError<Food>('putDessert'))
+    );
+  }
+
+  /*----------   DELETEs   ----------*/
+
+  deleteEntree(id): Observable<Food> {
+    return this.http.delete<Food>(`${apiMenuUrl}/entrees/${id}`, httpOptions).pipe(
+      catchError(this.handleError<Food>('deleteEntree'))
+    );
+  }
+
+  deleteToast(id): Observable<Food> {
+    return this.http.delete<Food>(`${apiMenuUrl}/toasts/${id}`, httpOptions).pipe(
+      catchError(this.handleError<Food>('deleteToast'))
+    );
+  }
+
+  deleteSalad(id): Observable<Food> {
+    return this.http.delete<Food>(`${apiMenuUrl}/salads/${id}`, httpOptions).pipe(
+      catchError(this.handleError<Food>('deleteSalad'))
+    );
+  }
+
+  deletePasta(id): Observable<Food> {
+    return this.http.delete<Food>(`${apiMenuUrl}/pastas/${id}`, httpOptions).pipe(
+      catchError(this.handleError<Food>('deletePasta'))
+    );
+  }
+
+  deleteScrambled(id): Observable<Food> {
+    return this.http.delete<Food>(`${apiMenuUrl}/scrambleds/${id}`, httpOptions).pipe(
+      catchError(this.handleError<Food>('deleteScrambled'))
+    );
+  }
+
+  deleteFish(id): Observable<Food> {
+    return this.http.delete<Food>(`${apiMenuUrl}/fishs/${id}`, httpOptions).pipe(
+      catchError(this.handleError<Food>('deleteFish'))
+    );
+  }
+
+  deleteMeat(id): Observable<Food> {
+    return this.http.delete<Food>(`${apiMenuUrl}/meats/${id}`, httpOptions).pipe(
+      catchError(this.handleError<Food>('deleteMeat'))
+    );
+  }
+
+  deleteDessert(id): Observable<Food> {
+    return this.http.delete<Food>(`${apiMenuUrl}/desserts/${id}`, httpOptions).pipe(
+      catchError(this.handleError<Food>('deleteDessert'))
+    );
+  }
+
   /**
  * Handle Http operation that failed.
  * Let the app continue.
