@@ -9,7 +9,6 @@ import { LoginService } from '../../services/login.service';
 import { ModalMenuPage } from '../modal-menu/modal-menu.page';
 
 const rootAssets = '../../../assets';
-const postResponseMessage = 'Nuevo producto añadido:';
 
 @Component({
   selector: 'app-menu',

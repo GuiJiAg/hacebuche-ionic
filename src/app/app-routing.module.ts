@@ -15,9 +15,17 @@ const routes: Routes = [
     path: 'menu',
     loadChildren: './pages/menu/menu.module#MenuPageModule'
   },
+  { 
+    path: 'menu/:param', 
+    loadChildren: './pages/menu-insert-update/menu-insert-update.module#MenuInsertUpdatePageModule' 
+  },
   {
     path: 'wines',
     loadChildren: './pages/wines/wines.module#WinesPageModule'
+  },
+  { 
+    path: 'wines/:param', 
+    loadChildren: './pages/wines-insert-update/wines-insert-update.module#WinesInsertUpdatePageModule' 
   },
   { 
     path: 'login', 
@@ -31,12 +39,7 @@ const routes: Routes = [
     path: 'noLogged', 
     redirectTo: '/login', 
     pathMatch: 'full' 
-  },
-  { 
-    path: 'menu/:param', 
-    loadChildren: './pages/menu-insert-update/menu-insert-update.module#MenuInsertUpdatePageModule' 
   }
-
 ];
 
 @NgModule({

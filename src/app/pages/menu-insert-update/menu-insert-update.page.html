@@ -15,13 +15,16 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-input [(ngModel)]="newFood.name" type="text" placeholder="Nombre" clearInput></ion-input>
+        <ion-label>Nombre:</ion-label>
+        <ion-input [(ngModel)]="newFood.name" type="text" clearInput></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input [(ngModel)]="newFood.description" type="text" placeholder="Descripción" clearInput></ion-input>
+        <ion-label>Descripción:</ion-label>
+        <ion-input [(ngModel)]="newFood.description" type="text" clearInput></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input #price [(ngModel)]="newFood.price" type="number" placeholder="Precio" clearInput></ion-input>
+        <ion-label>Precio:</ion-label>
+        <ion-input #price [(ngModel)]="newFood.price" type="number" clearInput></ion-input>
       </ion-item>
       <br />
       <ion-button 

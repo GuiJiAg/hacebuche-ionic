@@ -2,24 +2,24 @@ import { Component } from '@angular/core';
 import { ModalController, NavParams, AlertController, ToastController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 
-import { Food } from '../../models/food';
-import { MenuService } from 'src/app/services/menu.service';
+import { Wine } from '../../models/wine';
+import { WinesService } from 'src/app/services/wines.service';
 
 @Component({
-  selector: 'app-modal-menu',
-  templateUrl: './modal-menu.page.html',
-  styleUrls: ['./modal-menu.page.scss'],
+  selector: 'app-modal-wines',
+  templateUrl: './modal-wines.page.html',
+  styleUrls: ['./modal-wines.page.scss'],
 })
-export class ModalMenuPage {
+export class ModalWinesPage {
   collectionName: string;
-  collectionItems: Food[];
+  collectionItems: Wine[];
 
   constructor(
     private modalController: ModalController,
     private navParams: NavParams,
     private actionSheetController: ActionSheetController,
     private alertController: AlertController,
-    private menuService: MenuService,
+    private winesService: WinesService,
     private toastController: ToastController
   ) {}
 
@@ -60,8 +60,8 @@ export class ModalMenuPage {
     });
 
     await actionSheet.present();
-  } 
-
+  }
+  
   async confirmDelete(name, id) {
     const alert = await this.alertController.create({
       header: 'Borrar',
@@ -85,36 +85,32 @@ export class ModalMenuPage {
 
   sendRequest(id) {
     switch (this.collectionName) {
-      case 'Entrantes':
-        this.menuService.deleteEntree(id).subscribe(item => this.showToast());
+      case 'Andaluces':
+        this.winesService.deleteAndalusianWine(id).subscribe(item => this.showToast());
         this.dismissModal("delete");
         break;
-      case 'Tostas':
-        this.menuService.deleteToast(id).subscribe(item => this.showToast());
+      case 'Rioja':
+        this.winesService.deleteRiojaWine(id).subscribe(item => this.showToast());
         this.dismissModal("delete");
         break;
-      case 'Ensaladas':
-        this.menuService.deleteSalad(id).subscribe(item => this.showToast());
+      case 'Ribera del Duero':
+        this.winesService.deleteRiberaWine(id).subscribe(item => this.showToast());
         this.dismissModal("delete");
         break;
-      case 'Pastas':
-        this.menuService.deletePasta(id).subscribe(item => this.showToast());
+      case 'Castilla':
+        this.winesService.deleteCastillaWine(id).subscribe(item => this.showToast());
         this.dismissModal("delete");
         break;
-      case 'Revueltos':
-        this.menuService.deleteScrambled(id).subscribe(item => this.showToast());
+      case 'Albariños':
+        this.winesService.deleteAlbarinio(id).subscribe(item => this.showToast());
         this.dismissModal("delete");
         break;
-      case 'Pescados':
-        this.menuService.deleteFish(id).subscribe(item => this.showToast());
+      case 'Rueda':
+        this.winesService.deleteRuedaWine(id).subscribe(item => this.showToast());
         this.dismissModal("delete");
         break;
-      case 'Carnes':
-        this.menuService.deleteMeat(id).subscribe(item => this.showToast());
-        this.dismissModal("delete");
-        break;
-      case 'Postres':
-        this.menuService.deleteDessert(id).subscribe(item => this.showToast());
+      case 'Olorosos':
+        this.winesService.deleteOloroso(id).subscribe(item => this.showToast());
         this.dismissModal("delete");
         break;
     }

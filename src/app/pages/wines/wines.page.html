@@ -11,4 +11,25 @@
 
 <ion-content>
 
+  <ion-card class="card">
+    <ion-img src="/assets/wines.jpg"></ion-img>
+    <ion-card-header>
+      <ion-card-title>Vinos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Pulse en la colección que desee consultar</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list *ngFor="let collection of collections">
+    <ion-item button="true" (click)=getCollectionItems(collection.name)>
+      <ion-thumbnail slot="start">
+        <img [src]="collection.img">
+      </ion-thumbnail>
+      <ion-label>
+        {{collection.name}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
