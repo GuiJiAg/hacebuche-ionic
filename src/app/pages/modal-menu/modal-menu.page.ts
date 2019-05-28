@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, NavParams, AlertController, ToastController } from '@ionic/angular';
+import { ModalController, NavParams, AlertController, ToastController, LoadingController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 
 import { Food } from '../../models/food';
@@ -20,6 +20,7 @@ export class ModalMenuPage {
     private actionSheetController: ActionSheetController,
     private alertController: AlertController,
     private menuService: MenuService,
+    private loadingController: LoadingController,
     private toastController: ToastController
   ) {}
 
@@ -84,6 +85,8 @@ export class ModalMenuPage {
   }
 
   sendRequest(id) {
+    this.presentLoading();
+    
     switch (this.collectionName) {
       case 'Entrantes':
         this.menuService.deleteEntree(id).subscribe(item => this.showToast());
@@ -120,6 +123,16 @@ export class ModalMenuPage {
     }
   }
 
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando...',
+      spinner: 'dots',
+      translucent: true
+    });
+
+    await loading.present();
+  } 
+
   async showToast() {
     const toast = await this.toastController.create({
       message: `Producto eliminado de ${this.collectionName}`,
@@ -128,6 +141,7 @@ export class ModalMenuPage {
       color: 'dark'
     });
     
+    this.loadingController.dismiss();
     toast.present();
   }
 }

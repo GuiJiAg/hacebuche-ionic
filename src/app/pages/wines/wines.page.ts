@@ -94,7 +94,6 @@ export class WinesPage implements OnInit {
     const loading = await this.loadingController.create({
       message: 'Cargando...',
       spinner: 'dots',
-      duration: 1000,
       translucent: true
     });
 
@@ -119,6 +118,7 @@ export class WinesPage implements OnInit {
        }
     });
     
+    this.loadingController.dismiss();
     await modal.present();
   }
 

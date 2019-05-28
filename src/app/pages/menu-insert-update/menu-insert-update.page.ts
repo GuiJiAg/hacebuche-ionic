@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ToastController, LoadingController } from '@ionic/angular';
 
 import { LoginService } from 'src/app/services/login.service';
 import { MenuService } from 'src/app/services/menu.service';
@@ -33,6 +33,7 @@ export class MenuInsertUpdatePage implements OnInit {
     private menuService: MenuService,
     private alertController: AlertController,
     private router: Router,
+    private loadingController: LoadingController,
     private toastController: ToastController
     ) { }
 
@@ -88,6 +89,10 @@ export class MenuInsertUpdatePage implements OnInit {
   }
 
   sendRequest() {
+    if(!this.isGet) {
+      this.presentLoading();
+    }
+
     switch (this.collectionName) {
       case 'Entrantes':
         if (this.isPost) {
@@ -220,6 +225,16 @@ export class MenuInsertUpdatePage implements OnInit {
     }
   }
 
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando...',
+      spinner: 'dots',
+      translucent: true
+    });
+
+    await loading.present();
+  } 
+
   async showToast(message) {
     const toast = await this.toastController.create({
       message: message,
@@ -228,6 +243,7 @@ export class MenuInsertUpdatePage implements OnInit {
       color: 'dark'
     });
     
+    this.loadingController.dismiss();
     toast.present();
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 import { LoginService } from '../../services/login.service';
 import { Credential } from '../../models/credential';
@@ -14,13 +14,15 @@ export class LoginPage {
   
   constructor(
     private login: LoginService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private loadingController: LoadingController
     ) { }
 
   signIn(email, password) {
     this.credentials.email = email;
     this.credentials.password = password;
 
+    this.presentLoading();
     this.login.signIn(this.credentials).subscribe(
       response => this.checkResponse(response)
     );
@@ -28,6 +30,7 @@ export class LoginPage {
 
   checkResponse(response) {
     if (response.message != 'Acceso concedido') {
+      this.loadingController.dismiss();
       this.showErrorMessageAlert();
     }
     else {
@@ -46,4 +49,14 @@ export class LoginPage {
 
     await alert.present();
   }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Iniciando sesión...',
+      spinner: 'dots',
+      translucent: true
+    });
+
+    await loading.present();
+  } 
 }

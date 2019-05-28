@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, NavParams, AlertController, ToastController } from '@ionic/angular';
+import { ModalController, NavParams, AlertController, ToastController, LoadingController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 
 import { Wine } from '../../models/wine';
@@ -20,6 +20,7 @@ export class ModalWinesPage {
     private actionSheetController: ActionSheetController,
     private alertController: AlertController,
     private winesService: WinesService,
+    private loadingController: LoadingController,
     private toastController: ToastController
   ) {}
 
@@ -84,6 +85,8 @@ export class ModalWinesPage {
   }
 
   sendRequest(id) {
+    this.presentLoading();
+
     switch (this.collectionName) {
       case 'Andaluces':
         this.winesService.deleteAndalusianWine(id).subscribe(item => this.showToast());
@@ -116,6 +119,16 @@ export class ModalWinesPage {
     }
   }
 
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando...',
+      spinner: 'dots',
+      translucent: true
+    });
+
+    await loading.present();
+  } 
+
   async showToast() {
     const toast = await this.toastController.create({
       message: `Producto eliminado de ${this.collectionName}`,
@@ -124,6 +137,7 @@ export class ModalWinesPage {
       color: 'dark'
     });
     
+    this.loadingController.dismiss();
     toast.present();
   }
 }
